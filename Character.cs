@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-using InnerSpaceAPI;
 using LavishScriptAPI;
 
 namespace Aion.isxAion
 {
-    public class Character : LavishScriptObject
+    public class Character : Entity
 	{
 		#region Constructors
         public Character(LavishScriptObject Obj)
@@ -22,18 +17,199 @@ namespace Aion.isxAion
 		#endregion
 
 		#region Members
-        #region isxAion-1.5.1.4.0194
-        /// <summary>
-        /// Seconds remaining on the current spell/ability cast
-        /// </summary>
-        public float CastTimeRemaining
+        #region isxAion-20130130.1965
+        public Entity Pet
         {
-            get
-            {
-                return GetMember<float>("CastTimeRemaining");
-            }
+            get { return GetMember<Entity>("Pet"); }
+        }
+        #endregion
+
+        #region isxAion-20130130.1907
+        public Entity Following
+        {
+            get {return GetMember<Entity>("Following");}
         }
 
+        public uint FollowingID
+        {
+            get { return GetMember<uint>("Following", "ID"); }
+        }
+        #endregion
+
+        #region isxAion-20130130.1751
+        public bool OnFastTrackServer
+        {
+            get { return GetMember<bool>("OnFastTrackServer"); }
+        }
+        #endregion
+
+        #region isxAion-20130130.1548
+        public Inventory Inventory()
+        {
+            return new Inventory(GetMember("Inventory"));
+        }
+
+        public InventoryItem Inventory(int slotNumber)
+        {
+            return new InventoryItem(GetMember("Inventory", slotNumber.ToString()));
+        }
+
+        public InventoryItem InventoryByID(int itemID)
+        {
+            return new InventoryItem(GetMember("Inventory", "id", itemID.ToString()));
+        }
+
+        public InventoryItem Inventory(string itemName)
+        {
+            return new InventoryItem(GetMember("Inventory", itemName));
+        }
+
+        public InventoryItem InventoryNameContains(string substring)
+        {
+            return new InventoryItem(GetMember("Inventory", "NameContains", substring));
+        }
+
+        public Inventory Equipment()
+        {
+            return new Inventory(GetMember("Equipment"));
+        }
+
+        public EquipmentItem Equipment(int slotNumber)
+        {
+            return new EquipmentItem(GetMember("Equipment", slotNumber.ToString()));
+        }
+
+        public EquipmentItem EquipmentByID(int itemID)
+        {
+            return new EquipmentItem(GetMember("Equipment", "id", itemID.ToString()));
+        }
+
+        public EquipmentItem Equipment(string itemName)
+        {
+            return new EquipmentItem(GetMember("Equipment", itemName));
+        }
+
+        public EquipmentItem EquipmentNameContains(string substring)
+        {
+            return new EquipmentItem(GetMember("Equipment", "NameContains", substring));
+        }
+
+        public Inventory SpecialCube()
+        {
+            return new Inventory(GetMember("SpecialCube"));
+        }
+
+        public SpecialCubeItem SpecialCube(int slotNumber)
+        {
+            return new SpecialCubeItem(GetMember("SpecialCube", slotNumber.ToString()));
+        }
+
+        public SpecialCubeItem SpecialCubeByID(int itemID)
+        {
+            return new SpecialCubeItem(GetMember("SpecialCube", "id", itemID.ToString()));
+        }
+
+        public SpecialCubeItem SpecialCube(string itemName)
+        {
+            return new SpecialCubeItem(GetMember("SpecialCube", itemName));
+        }
+
+        public SpecialCubeItem SpecialCubeNameContains(string substring)
+        {
+            return new SpecialCubeItem(GetMember("SpecialCube", "NameContains", substring));
+        }
+
+        public Inventory Warehouse()
+        {
+            return new Inventory(GetMember("Warehouse"));
+        }
+
+        public WarehouseItem Warehouse(int slotNumber)
+        {
+            return new WarehouseItem(GetMember("Warehouse", slotNumber.ToString()));
+        }
+
+        public WarehouseItem WarehouseByID(int itemID)
+        {
+            return new WarehouseItem(GetMember("Warehouse", "id", itemID.ToString()));
+        }
+
+        public WarehouseItem Warehouse(string itemName)
+        {
+            return new WarehouseItem(GetMember("Warehouse", itemName));
+        }
+
+        public WarehouseItem WarehouseNameContains(string substring)
+        {
+            return new WarehouseItem(GetMember("Warehouse", "NameContains", substring));
+        }
+        #endregion
+
+        #region isxAion-20130130.1548
+        public float FlightTimeAsPercent
+        {
+            get { return GetMember<float>("FlightTime", "true"); }
+        }
+        #endregion
+
+        #region isxAion-20130130.1159
+        /// <summary>
+        /// TRUE while the "gathering window" is visible
+        /// </summary>
+        public bool IsGathering
+        {
+            get { return GetMember<bool>("IsGathering"); }
+        }
+        #endregion
+
+        #region isxAion-20130130.0975
+        public Group Group()
+        {
+            return new Group(GetMember("Group"));
+        }
+
+        public GroupMember Group(int groupMemberNumber)
+        {
+            return new GroupMember(GetMember("Group", groupMemberNumber.ToString()));
+        }
+
+        public GroupMember Group(string groupMemberName)
+        {
+            return new GroupMember(GetMember("Group", groupMemberName));
+        }
+        #endregion
+
+        #region isxAion-20130130.0949
+        /// <summary>
+        /// When looping through Abilities by index, be sure that you only call character.NumAbilities once and then set it to a local variable.  Using
+        /// character.NumAbilities itself, in the looping routine, will cause performance issues.
+        /// </summary>
+        public int NumAbilities
+        {
+            get { return GetMember<int>("NumAbilities"); }
+        }
+
+        /// <summary>
+        /// Retrieving abilities by ID is the most efficient, due to how things are handled.  However, there are no
+        /// server calls for retrieving abilities by index or name and the differences in retrieval methods are negligible.
+        /// </summary>
+        public Ability Ability(int abilityNumber)
+        {
+            return new Ability(GetMember("Ability", abilityNumber.ToString()));
+        }
+
+        public Ability AbilityByID(int abilityID)
+        {
+            return new Ability(GetMember("Ability", abilityID.ToString()));
+        }
+
+        public Ability Ability(string abilityName)
+        {
+            return new Ability(GetMember("Ability", abilityName));
+        }
+        #endregion
+
+        #region isxAion-1.5.1.4.0194
         /// <summary>
         /// Seconds you have been casting the current spell/ability
         /// </summary>
@@ -46,22 +222,6 @@ namespace Aion.isxAion
         }
         #endregion
         #region isxAion-1.5.1.4.0074
-        public int HP
-        {
-            get
-            {
-                return GetMember<int>("HP");
-            }
-        }
-
-        public int MaxHP
-        {
-            get
-            {
-                return GetMember<int>("MaxHP");
-            }
-        }
-
         public int MP
         {
             get
@@ -134,14 +294,6 @@ namespace Aion.isxAion
             }
         }
 
-        public int Level
-        {
-            get
-            {
-                return GetMember<int>("Level");
-            }
-        }
-
         public int Kinah
         {
             get
@@ -182,24 +334,98 @@ namespace Aion.isxAion
             }
         }
         #endregion
-
-        public Entity ToEntity
-		{
-			get
-			{
-				return new Entity(GetMember("ToEntity"));
-			}
-		}
-        public Entity Target
-        {
-            get
-            {
-                return new Entity(GetMember("Target"));
-            }
-        }
         #endregion
 
 		#region Methods
+        #region isxAion-20130130.1907
+        /// <summary>
+        /// It is safe to use this method at any point.  If the character is not currently on 'auto follow' the 
+        /// method will do nothing.
+        /// </summary>
+        public bool StopAutoFollow()
+        {
+            return ExecuteMethod("StopAutoFollow");
+        }
+        #endregion
+
+        #region isxAion-20130130.1839
+        public bool Quit()
+        {
+            return ExecuteMethod("Quit");
+        }
+
+        public bool Logout()
+        {
+            return ExecuteMethod("Logout");
+        }
+
+        public bool Characters()
+        {
+            return ExecuteMethod("Characters");
+        }
+        #endregion
+
+        #region isxAion-20130130.1751
+        /// <summary>
+        /// This method will avoid the annoying popup window; however, it will still do all of the appropriate checks.  Therefore,  
+        /// the script will need to check for failure by accessing entity.IsMentor.
+        /// </summary>
+        public bool MentorTarget()
+        {
+            return ExecuteMethod("MentorTarget");
+        }
+
+        /// <summary>
+        /// This method will silently fail if the character is not currently mentoring.  (i.e., you do not have to check "IsMentor"
+        /// before calling this method.)
+        /// </summary>
+        public bool StopMentoring()
+        {
+            return ExecuteMethod("StopMentoring");
+        }
+        #endregion
+
+        #region isxAion-20130130.0912
+        /// <summary>
+        /// "Follow" will toggle auto-follow on your current target if used with no arguments.  Otherwise, you can provide
+        /// the ID# of the player you wish to follow.
+        /// </summary>
+        public bool Follow()
+        {
+            return ExecuteMethod("Follow");
+        }
+
+        public bool Follow(int playerID)
+        {
+            return ExecuteMethod("Follow", playerID.ToString());
+        }
+
+        public bool InviteToGroup(string name)
+        {
+            return ExecuteMethod("InviteToGroup", name);
+        }
+
+        /// <summary>
+        /// This function duplicates the action that occurs when you click on an entity after it has already been targetted.
+        /// For non-attackable types, it will move you to the target and interact with it.  For attackable targets, it will
+	    /// move you to the target and begin auto-attack.
+        /// If the "No Interaction" parameter is used, then for NON-attackable types, you will simply move to the target and stop.
+        /// This method currently works for PCs, NPCs, gatherables, lootables, and most all interactable objects that can be 
+        /// targeted.
+        /// Unlike the in-game mechanics, if you try to "ClickTarget" on a corpse that you cannot loot, or a gatherable that is
+        /// above your level, the method will do nothing.
+        /// </summary>
+        public bool ClickTarget()
+        {
+            return ExecuteMethod("ClickTarget");
+        }
+
+        public bool ClickTargetWithoutInteraction()
+        {
+            return ExecuteMethod("ClickTarget", "No Interaction");
+        }
+        #endregion
+
         #region isxAion-1.5.1.4.0236
         public bool ToggleResting()
         {

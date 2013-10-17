@@ -63,6 +63,15 @@ namespace Aion.isxAion
         #endregion
 
         #region Methods
+        #region isxAion-20130130.1099
+        /// <summary>
+        /// This method is to allow one lavishscript variable to be reused.
+        /// </summary>
+        public bool Set(int datatypeID)
+        {
+            return ExecuteMethod("Set", datatypeID.ToString());
+        }
+        #endregion
         #endregion
     }
 }

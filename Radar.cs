@@ -34,6 +34,13 @@ namespace Aion.isxAion
         #endregion
 
         #region Members
+        #region isxAion-20130626.0141
+        public bool ShowingCraftingTables
+        {
+            get { return GetMember<bool>("ShowingCraftingTables"); }
+        }
+        #endregion
+
         #region isxAion-1.5.1.4.0074
         /// <summary>
         /// Red dots show AgroNPCs on the radar
@@ -242,6 +249,13 @@ namespace Aion.isxAion
         #endregion
 
         #region Methods
+        #region isxAion-20130626.0141
+        public bool FilterCraftingTables()
+        {
+            return ExecuteMethod("FilterCraftingTables");
+        }
+        #endregion
+
         #region isxAion-1.5.1.4.0074
         public bool FilterAggroNPCs()
         {

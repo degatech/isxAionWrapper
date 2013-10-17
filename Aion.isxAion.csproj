@@ -61,16 +61,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ability.cs" />
+    <Compile Include="AbilityInfo.cs" />
     <Compile Include="AbyssRank.cs" />
+    <Compile Include="Buff.cs" />
+    <Compile Include="ChainSkill.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Aion.cs" />
     <Compile Include="Events\Event.cs" />
     <Compile Include="Events\EventArgs.cs" />
     <Compile Include="Extension.cs" />
+    <Compile Include="GatherData.cs" />
+    <Compile Include="Group.cs" />
+    <Compile Include="GroupMember.cs" />
+    <Compile Include="Inventory.cs" />
     <Compile Include="isxAion.cs" />
+    <Compile Include="Items\EquipmentItem.cs" />
+    <Compile Include="Items\InventoryItem.cs" />
+    <Compile Include="Items\ItemInfo.cs" />
+    <Compile Include="Items\ListItem.cs" />
+    <Compile Include="Items\LootItem.cs" />
+    <Compile Include="Items\SpecialCubeItem.cs" />
+    <Compile Include="Items\WarehouseItem.cs" />
+    <Compile Include="NPCInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Radar.cs" />
+    <Compile Include="UI\AionButton.cs" />
+    <Compile Include="UI\AionEditBox.cs" />
+    <Compile Include="UI\AionUIText.cs" />
+    <Compile Include="UI\AionWidget.cs" />
+    <Compile Include="UI\AionWindow.cs" />
+    <Compile Include="UI\ChainSkillWindow.cs" />
+    <Compile Include="UI\CharSelectWindow.cs" />
+    <Compile Include="UI\ConversationWindow.cs" />
+    <Compile Include="UI\CraftingWindow.cs" />
+    <Compile Include="UI\EULAWindow.cs" />
+    <Compile Include="UI\LoginWindow.cs" />
+    <Compile Include="UI\LootWindow.cs" />
+    <Compile Include="UI\PinWindow.cs" />
+    <Compile Include="UI\QuestionWindow.cs" />
+    <Compile Include="UI\RessurectionFromOthersWindow.cs" />
+    <Compile Include="UI\SelfRessurectionWindow.cs" />
+    <Compile Include="UI\TeleportWindow.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>

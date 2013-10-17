@@ -13,12 +13,15 @@ namespace Aion.isxAion
 		#region .Net Events
         // Events that have no arguments
         public event EventHandler<LSEventArgs> StopCastAbility;
+	    public event EventHandler<LSEventArgs> QuestionWindow;
+	    public event EventHandler<LSEventArgs> ObstaclePreventedAbility;
+        public event EventHandler<LSEventArgs> CastAbility;
 
         // All other events
         public event EventHandler<IncomingTextEventArgs> IncomingText;
-        public event EventHandler<CastAbilityEventArgs> CastAbility;
         public event EventHandler<EntitySpawnedEventArgs> EntitySpawned;
         public event EventHandler<EntityDespawnedEventArgs> EntityDespawned;
+        
 		
         #endregion
 
@@ -33,10 +36,10 @@ namespace Aion.isxAion
         }
         protected virtual void onCastAbility(object Sender, LSEventArgs e)
         {
-            EventHandler<CastAbilityEventArgs> temp = CastAbility;
+            EventHandler<LSEventArgs> temp = CastAbility;
             if (temp != null)
             {
-                temp(Sender, new CastAbilityEventArgs(e.Args));
+                temp(Sender, new LSEventArgs(e.Args));
             }
         }
         protected virtual void onStopCastAbility(object Sender, LSEventArgs e)
@@ -63,6 +66,24 @@ namespace Aion.isxAion
                 temp(Sender, new EntityDespawnedEventArgs(e.Args));
             }
         }
+
+        protected virtual void onQuestionWindow(object Sender, LSEventArgs e)
+        {
+            EventHandler<LSEventArgs> temp = QuestionWindow;
+            if (temp != null)
+            {
+                temp(Sender, new LSEventArgs(e.Args));
+            }
+        }
+
+        protected virtual void onObstaclePreventedAbility(object Sender, LSEventArgs e)
+        {
+            EventHandler<LSEventArgs> temp = ObstaclePreventedAbility;
+            if (temp != null)
+            {
+                temp(Sender, new LSEventArgs(e.Args));
+            }
+        }
 		#endregion
 
 		~Event()
@@ -72,6 +93,8 @@ namespace Aion.isxAion
             Attach("Aion_onStopCastAbility", onStopCastAbility);
             Attach("Aion_OnEntitySpawned", onEntitySpawned);
             Attach("Aion_onEntityDespawned", onEntityDespawned);
+            Attach("Aion_onQuestionWindow", onQuestionWindow);
+            Attach("Aion_onObstaclePreventedAbility", onObstaclePreventedAbility);
 		}
 
 		public Event()
@@ -81,6 +104,9 @@ namespace Aion.isxAion
             Detach("Aion_onStopCastAbility", onStopCastAbility);
             Detach("Aion_OnEntitySpawned", onEntitySpawned);
             Detach("Aion_onEntityDespawned", onEntityDespawned);
+            Detach("Aion_onQuestionWindow", onQuestionWindow);
+            Detach("Aion_onObstaclePreventedAbility", onObstaclePreventedAbility);
+		    ;
 		}
 
 

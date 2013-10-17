@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-using InnerSpaceAPI;
 using LavishScriptAPI;
 
 namespace Aion.isxAion
 {
-    public class Entity : LavishScriptObject
+    public class Entity : NPCInfo
     {
         #region Constructors
         public Entity(LavishScriptObject Obj)
@@ -33,6 +28,99 @@ namespace Aion.isxAion
 
 
         #region Members
+        #region isxAion-20130626.0193
+        public bool IsCrafting
+        {
+            get { return GetMember<bool>("IsCrafting"); }
+        }
+        #endregion
+
+        #region isxAion-20130130.1808
+        /// <summary>
+        /// Pleae note that this will not be TRUE if you're on a moving transport (elevator, etc.)
+        /// </summary>
+        public bool IsMoving
+        {
+            get { return GetMember<bool>("IsMoving"); }
+        }
+
+        /// <summary>
+        /// TRUE when falling from a distance that would cause damage
+        /// </summary>
+        public bool IsFalling
+        {
+            get { return GetMember<bool>("IsFalling"); }
+        }
+
+        /// <summary>
+        /// i.e., spacebar instigated gliding
+        /// </summary>
+        public bool IsGliding
+        {
+            get { return GetMember<bool>("IsGliding"); }
+        }
+
+        /// <summary>
+        /// "Soaring" is when you are gliding and hold the forward movement key
+        /// </summary>
+        public bool IsSoaring
+        {
+            get { return GetMember<bool>("IsSoaring"); }
+        }
+
+        /// <summary>
+        /// i.e., taking a ride via the "Flight Transporter"
+        /// </summary>
+        public bool IsInFlightTransport
+        {
+            get { return GetMember<bool>("IsInFlightTransport"); }
+        }
+        #endregion
+
+        #region isxAion-20130130.1751
+        public bool IsMentor
+        {
+            get { return GetMember<bool>("IsMentor"); }
+        }
+        #endregion
+
+        #region isxAion-20130130.0971
+        /// <summary>
+        /// Returns TRUE if the entity is a PC and is currently auto-following another PC.
+        /// </summary>
+        public bool IsFollowing
+        {
+            get { return GetMember<bool>("IsFollowing"); }
+        }
+        #endregion
+
+        #region #region isxAion-20130130.0912
+        /// <summary>
+        /// Any time you use "LocationLink" (or any type of chat links), make sure that you include it in quotation 
+        /// marks.  (i.e:  AionEcho ${Me.LocationLink} ..won't work, but AionEcho "${Me.LocationLink}" will.)
+        /// </summary>
+        public string LocationLink
+        {
+            get { return GetMember<string>("LocationLink"); }
+        }
+
+        /// <summary>
+        /// 'WhereLink' is the magenta link (and mini-map "x") that appears when you use the "locate" feature (i.e.,
+        ///  in the quest journal.)  Also, just like those magenta links, when used with non-named creatures it will 
+        ///  actually point to the nearest entity that matches the 'type' of the one you used to create the link.
+        /// </summary>
+        public string WhereLink
+        {
+            get { return GetMember<string>("WhereLink"); }
+        }
+        #endregion
+
+        #region isxAion-1.5.1.7.0151
+        public GatherData GatherData
+        {
+            get { return new GatherData(GetMember("GatherData")); }
+        }
+        #endregion
         #region isxAion-1.5.1.4.0194
         public AbyssRank AbyssRank
         {
@@ -233,20 +321,6 @@ namespace Aion.isxAion
         }
         #endregion
 
-        public uint ID
-        {
-            get
-            {
-                return GetMember<uint>("ID");
-            }
-        }
-        public string Name
-        {
-            get
-            {
-                return GetMember<string>("Name");
-            }
-        }
         /// <summary>
         /// Possible Types (as of 11/2009):  Me, NPC, PC, Resource, Special, Unknown, Chair, Birds, SoundSpot, Random Ambient Sound, Bugs, Portal, Fish, Object, Milestone
         /// </summary>
@@ -383,7 +457,15 @@ namespace Aion.isxAion
         #endregion
 
         #region Methods
-
+        #region isxAion-20130130.1015
+        /// <summary>
+        /// This method is to allow one lavishscript variable to be reused.
+        /// </summary>
+        public bool Set(int datatypeID)
+        {
+            return ExecuteMethod("Set", datatypeID.ToString());
+        }
+        #endregion
 
         #region isxAion-1.5.1.4.0116
         public bool DoTarget()
